@@ -20,10 +20,29 @@
 	<div class="alert alert-warning" role="alert"><strong>warning</strong>：　現在改修中の為、何でも登録できちゃいます！！！！</div>
 	</c:if>
 
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>No.</th>
+				<th>ユーザーID</th>
+				<th>登録日</th>
+			</tr>
+		</thead>
+		<tbody>
 <c:forEach var="e" items="${userList}">
-${f:h(e.userid)}
-<hr />
+			<tr>
+				<td><input type="checkbox"/></td>
+				<th>1</th>
+				<td>${f:h(e.userid)}</td>
+				<td>${f:h(e.createdDate)}</td>
+			</tr>
 </c:forEach>
+		</tbody>
+	</table>
+</div>
+<hr />
 
 	<form class="form-horizontal" method="post" action="/users/userCreate">
 	<div class="input-group">
