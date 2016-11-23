@@ -1,16 +1,15 @@
 <%@page pageEncoding="UTF-8" isELIgnored="false" session="false"%>
+<%@page import="java.util.Calendar"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
-
+<%@taglib prefix="calendar" uri="http://www.sacn.co.jp/tags/calendar"%>
 <html>
 <head>
 <%@ include file="/common/header.jsp"%>
 <script src="/js/custom/timesheet.js"></script>
 </head>
-
-
-  <body>
+<body>
 <div class="container-fluid bg-info form-inline">
 <h1 class="text-center text-primary">
 <div class="btn-toolbar" role="toolbar">
@@ -35,90 +34,15 @@
 </div>
 </h1>
 </div>
-
 <form class="form-horizontal">
 <div class="container-fluid">
-<div class="calendar-link">
-<a href="#">
-<!-- 年間カレンダーへの遷移 -->
-<span class="glyphicon glyphicon-chevron-left" aria-hidden="true" onclick="javascript:location.href='./year_calendar.htm'">
-<script type="text/javascript"><!--
-	myDate    = new Date();                                    // 今日の日付データ取得
-	myYear = myDate.getFullYear();                                 // 年の取得
-	myMonth = myDate.getMonth();                               // 月を取得(0月～11月)
-	document.write(myYear, "年", (myMonth+1), "月");
-// --></script>
-</span>
-</a>
-</div>
-
-<script type="text/javascript"><!--
-	// ****************
-	//      下準備   
-	// ****************
-	myDate    = new Date();                                    // 今日の日付データ取得
-	myWeekTbl = new Array("日","月","火","水","木","金","土");  // 曜日テーブル定義
-	myMonthTbl= new Array(31,28,31,30,31,30,31,31,30,31,30,31);// 月テーブル定義
-	myYear = myDate.getFullYear();                                 // 年の取得
-	if (((myYear%4)==0 && (myYear%100)!=0) || (myYear%400)==0){ // うるう年だったら...
-	   myMonthTbl[1] = 29;                                     // 　２月を２９日とする
-	}
-	myMonth = myDate.getMonth();                               // 月を取得(0月～11月)
-	myToday = myDate.getDate();                                // 今日の'日'を退避
-	myDate.setDate(1);                                         // 日付を'１日'に変えて、
-	myWeek = myDate.getDay();                                  // 　'１日'の曜日を取得
-	myTblLine = Math.ceil((myWeek+myMonthTbl[myMonth])/7);     // カレンダーの行数
-	myTable   = new Array(7*myTblLine);                        // 表のセル数分定義
-	
-	for(i=0; i<7*myTblLine; i++) myTable[i]="　";              // myTableを掃除する
-	for(i=0; i<myMonthTbl[myMonth]; i++)myTable[i+myWeek]=i+1; // 日付を埋め込む
-	
-	// ***********************
-	//      カレンダーの表示  
-	// ***********************
-	document.write("<table class='table table-striped table-hover'>");      // 表の作成開始
-	document.write("<tr>");                                    // 曜日見出しセット
-	for(i=0; i<7; i++){                                        // 一行(１週間)ループ
-	   document.write("<th class='text-center'>");
-	   document.write("<span class='");    // '日'から'土'の表示
-		  if (i==0)document.write("text-danger'>"); // 選択セルの色
-		  else if (i==6)document.write("text-info'>"); // 選択セルの色
-		  else               document.write("'>"); // 非選択のセルの色
-	   document.write(myWeekTbl[i],"</span>");    // '日'から'土'の表示
-	   document.write("</th>");
-	}
-	document.write("</tr>");
-	
-	for(i=0; i<myTblLine; i++){                                // 表の「行」のループ
-	   document.write("<tr>");                                 // 行の開始
-	   for(j=0; j<7; j++){                                     // 表の「列」のループ
-		  document.write("<td class='text-center");               // 列(セル)の作成
-		  myDat = myTable[j+(i*7)];                            // 書きこむ内容の取得
-		  if (myDat==myToday)document.write(" info'>"); // 選択セルの色
-		  else               document.write("'>"); // 非選択のセルの色
-		  document.write("<a href='#'>",myDat,"</a>");        // 日付セット
-		  document.write("</td>");                             // 列(セル)の終わり
-	   }
-	   document.write("</tr>");                                // 行の終わり
-	}
-	document.write("</table>");                                // 表の終わり
-// --></script>
+<% Calendar calendar = Calendar.getInstance(); %>
+<calendar:Calendar year="<%=Integer.toString(calendar.get(Calendar.YEAR)) %>"
+                   month="<%=Integer.toString(calendar.get(Calendar.MONTH) + 1) %>" />
 
 </div>
-<div class="well">
-<div class="container bg-default">
-	 <h3 class="text-primary">
-<script type="text/javascript"><!--
-	myWeekTbl = new Array("日","月","火","水","木","金","土");  // 曜日テーブル定義
-	myDate    = new Date();                                    // 今日の日付データ取得
-	myMonth = myDate.getMonth();                               // 月を取得(0月～11月)
-	myToday = myDate.getDate();                                // 今日の'日'を退避
-	myWeek = myDate.getDay();                                  // 　'日'の曜日を取得
-	myTitle = "今日"
-	document.write(myTitle, " ",(myMonth+1), "月",myToday, "日 ",myWeekTbl[myWeek],"曜日");
-// --></script>
-</h3>
 </form>
+
 <form class="form-horizontal">
 	<div class="form-group form-group-lg">
 		<h4 style="display:inline-flex" for="InputSelect1">休 暇 等 ：</h4>
@@ -192,7 +116,7 @@
 				<option>00</option>
 				<option>30</option>
 			</select>
-			</div>
+			</div>	
 	</div>
 	<div class="form-group form-group-lg">
 		<label class="col-sm-2 control-label sr-only" for="InputText">行き先（常駐先）</label>
