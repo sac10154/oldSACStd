@@ -27,6 +27,10 @@
         <filter-name>FrontController</filter-name>
         <filter-class>org.slim3.controller.FrontController</filter-class>
     </filter>
+	<filter>
+		<filter-name>AuthFilter</filter-name>
+		<filter-class>jp.co.sacn.filter.AuthFilter</filter-class>
+	</filter>
 
     <filter-mapping>
         <filter-name>HotReloadingFilter</filter-name>
@@ -46,8 +50,16 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
-    <servlet>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>    
+	  	
+      <servlet>
         <servlet-name>GlobalTransactionServlet</servlet-name>
         <servlet-class>org.slim3.datastore.GlobalTransactionServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -73,7 +85,30 @@
     </servlet-mapping>
     -->
 
-	<taglib>
+	<servlet>
+	    <servlet-name>_ah_sessioncleanup</servlet-name>
+	    <servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>_ah_sessioncleanup</servlet-name>
+	    <url-pattern>/_ah/sessioncleanup</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>session-cleanup</web-resource-name>
+	        <url-pattern>/_ah/sessioncleanup</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <role-name>admin</role-name>
+	    </auth-constraint>
+	</security-constraint>
+
+	<error-page>
+		<exception-type>javax.servlet.ServletException</exception-type>
+	    <location>/error.jsp</location>
+	</error-page>
+  
+  	<taglib>
     	<taglib-uri>http://www.sacn.co.jp/tags/calendar</taglib-uri>
     	<taglib-location>/WEB-INF/tld/calendar.tld</taglib-location>
 	</taglib>

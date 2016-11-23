@@ -5,10 +5,9 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Apple</title>
+<%@ include file="/common/header.jsp"%>
 </head>
 <body>
-<p>Hello Apple !!!</p>
+<h1>セッションエラーが起きました。再度<a href="/">こちら</a>からログインしてください。</h1>
 </body>
 </html>
