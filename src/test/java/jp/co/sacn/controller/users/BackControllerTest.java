@@ -2,6 +2,7 @@ package jp.co.sacn.controller.users;
 
 import org.slim3.tester.ControllerTestCase;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -12,7 +13,8 @@ public class BackControllerTest extends ControllerTestCase {
         tester.start("/users/back");
         BackController controller = tester.getController();
         assertThat(controller, is(notNullValue()));
-        assertThat(tester.isRedirect(), is(false));
-        assertThat(tester.getDestinationPath(), is(nullValue()));
+        assertThat(tester.isRedirect(), is(true));
+//        assertThat(tester.getDestinationPath(), is(nullValue()));
+        assertThat(tester.getDestinationPath(), is("/"));
     }
 }

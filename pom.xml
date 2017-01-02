@@ -6,7 +6,7 @@
   <version>1.0-SNAPSHOT</version>
   <properties>
     <slim3.version>1.0.17-SNAPSHOT</slim3.version>
-    <appengine.version>1.8.2</appengine.version>
+    <appengine.version>1.9.34</appengine.version>
     <generated.src>.apt_generated</generated.src>
     <generated.war>src/main/webapp</generated.war>
     <eclipse.lib>eclipse.lib</eclipse.lib>

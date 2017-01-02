@@ -12,7 +12,8 @@ public class UserManageControllerTest extends ControllerTestCase {
         tester.start("/login/userManage");
         UserManageController controller = tester.getController();
         assertThat(controller, is(notNullValue()));
-        assertThat(tester.isRedirect(), is(false));
-        assertThat(tester.getDestinationPath(), is(nullValue()));
+        assertThat(tester.isRedirect(), is(true));
+//        assertThat(tester.getDestinationPath(), is(nullValue()));
+        assertThat(tester.getDestinationPath(), is("/users/"));
     }
 }
