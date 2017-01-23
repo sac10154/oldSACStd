@@ -37,9 +37,9 @@
 <form class="form-horizontal">
 <div class="container">
 <% Calendar calendar = Calendar.getInstance(); %>
-<calendar:Calendar year="<%=Integer.toString(calendar.get(Calendar.YEAR)) %>"
-                   month="<%=Integer.toString(calendar.get(Calendar.MONTH) + 1) %>" />
-
+<calendar:Calendar year="${year}"
+                   month="${month}"
+                   day="${day}"/>
 </div>
 </form>
 

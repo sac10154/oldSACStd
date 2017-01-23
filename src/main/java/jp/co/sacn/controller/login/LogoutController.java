@@ -14,8 +14,6 @@ public class LogoutController extends Controller {
         	session.invalidate();
     	}
 
-//    	return redirect(basePath);
-//        return redirect("logout.jsp");
     	return forward("logout.jsp");
     }
 }

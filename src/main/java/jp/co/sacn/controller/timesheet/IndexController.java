@@ -1,20 +1,26 @@
 package jp.co.sacn.controller.timesheet;
 
-//import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
-//import org.slim3.util.ApplicationMessage;
 
 public class IndexController extends Controller {
 
     @Override
     public Navigation run() throws Exception {
-//    	HttpSession session = request.getSession(false);
-//    	if(session == null){
-//            errors.put("message", ApplicationMessage.get("error.login.failure"));
-//            return forward("/error.jsp");
-//    	}
+    	String year = this.request.getParameter("yy");
+    	String month = this.request.getParameter("mm");
+    	String day = this.request.getParameter("dd");
+    	if(year == null || month == null || day == null){
+    		Calendar calendar = Calendar.getInstance();
+    		year = Integer.toString(calendar.get(Calendar.YEAR));
+    		month = Integer.toString(calendar.get(Calendar.MONTH) + 1);
+    		day = Integer.toString(calendar.get(Calendar.DATE));
+    	}
+        requestScope("year",year);
+        requestScope("month",month);
+        requestScope("day",day);
     	return forward("index.jsp");
     }
 }

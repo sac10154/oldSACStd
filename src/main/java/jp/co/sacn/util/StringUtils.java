@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package jp.co.sacn.util;
 
@@ -10,7 +10,7 @@ package jp.co.sacn.util;
 public class StringUtils {
 
     private StringUtils() {};
-    
+
     /**
     * 文字列をnullチェック
     *
@@ -24,7 +24,7 @@ public class StringUtils {
         if(text.isEmpty() || "".equals(text)){
             return true;
         }
-        
+
         return false;
-    }    
+    }
 }

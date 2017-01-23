@@ -3,10 +3,10 @@ package jp.co.sacn.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.google.appengine.api.datastore.Key;
-
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+
+import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
 public class Employee implements Serializable {
@@ -19,10 +19,24 @@ public class Employee implements Serializable {
     @Attribute(version = true)
     private Long version;
 
+    // ユーザーID
     private String userid;
+
+    // パスワード
     private String password;
+
+    // 名
+    private String fname;
+
+    // 姓
+    private String sname;
+
+    // メールアドレス
+    private String email;
+
+    // 作成日
     private Date createdDate = new Date();
-    
+
     /**
      * Returns the key.
      *
@@ -89,7 +103,31 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    /**
+    public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
      * @return createdDate
      */
     public Date getCreatedDate() {
