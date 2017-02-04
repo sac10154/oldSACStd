@@ -7,7 +7,7 @@
 <html>
 <head>
 <%@ include file="/common/header.jsp"%>
-<script src="/js/custom/timesheet.js"></script>
+<script src="/js/custom/caledar.js"></script>
 </head>
 <body>
 <div class="container bg-info form-inline">
@@ -193,6 +193,11 @@
 </div>
 </div>
 <form id="logoutForm" method="POST" action="/login/logout">
+</form>
+<form id="calendarForm" method="POST" action="/timesheet/">
+<input type="hidden" name="yy" id="yy" value="${year}" />
+<input type="hidden" name="mm" id="mm" value="${month}" />
+<input type="hidden" name="dd" id="dd" value="${day}" />
 </form>
 </body>
 </html>

@@ -75,13 +75,14 @@ public class CalendarTag extends TagSupport{
             }
             //TODO:年月日の整合性チェック（うるう年もチェック）
 
+//            writer.println("<form id=\"calendarForm\" method=\"post\" action=\"/timesheet/Canlendar\">");
             writer.println("<div class=\"calendar-link\"><a href=\"#\">");
             writer.println("<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\" onclick=\"javascript:location.href='./year_calendar.htm'\">");
             writer.println(intYear + "年" + intMonth + "月");
             writer.println("</span></a></div>");
-            writer.println("<input type=\"hidden\" name=\"yy\" value=\"" + yyyy + "\" />");
-            writer.println("<input type=\"hidden\" name=\"mm\" value=\"" + mm + "\" />");
-            writer.println("<input type=\"hidden\" name=\"dd\" value=\"" + dd + "\" />");
+//            writer.println("<input type=\"hidden\" name=\"yy\" id=\"yy\" value=\"" + yyyy + "\" />");
+//            writer.println("<input type=\"hidden\" name=\"mm\" id=\"mm\" value=\"" + mm + "\" />");
+//            writer.println("<input type=\"hidden\" name=\"dd\" id=\"dd\" value=\"" + dd + "\" />");
 
             //一番上の曜日部分を作成
             writeHeader(writer);
@@ -135,9 +136,9 @@ public class CalendarTag extends TagSupport{
                     writer.print("<span class='text-info'>");
                 }
                 if ( week == Calendar.SUNDAY || week == Calendar.SATURDAY ) {
-                    writer.print("<a href='#'>" + calendar2.get(Calendar.DATE) + "</a></span></td>");
+                    writer.print("<a href='#' id='date' onclick='selectCalendar(this);'>" + calendar2.get(Calendar.DATE) + "</a></span></td>");
                 } else {
-                    writer.print("<a href='#'>" + calendar2.get(Calendar.DATE) + "</a></td>");
+                    writer.print("<a href='#' id='date' onclick='selectCalendar(this);'>" + calendar2.get(Calendar.DATE) + "</a></td>");
                 }
                 if ( week == Calendar.SATURDAY ) {
                     writer.println("</tr>");
@@ -158,6 +159,7 @@ public class CalendarTag extends TagSupport{
             }
 
             writer.println("</table>");
+//            writer.println("</form>");
         } catch (IOException e) {
             throw new JspException(e);
         }
