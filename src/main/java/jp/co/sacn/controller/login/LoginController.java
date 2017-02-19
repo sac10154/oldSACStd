@@ -2,6 +2,7 @@ package jp.co.sacn.controller.login;
 
 import javax.servlet.http.HttpSession;
 
+import jp.co.sacn.model.Employee;
 import jp.co.sacn.service.EmployeeService;
 
 import org.slim3.controller.Controller;
@@ -16,10 +17,12 @@ public class LoginController extends Controller {
     @Override
     public Navigation run() throws Exception {
     	HttpSession session = request.getSession(false);
-    	boolean blLogin = service.login(new RequestMap(request));
-        if(blLogin){
+    	Employee employee = service.login(new RequestMap(request));
+        if(employee != null){
             /* 認証済みにセット */
             session.setAttribute("login", "OK");
+            session.setAttribute("userid", employee.getUserid());
+        	requestScope("userid",employee.getUserid());
             return redirect("/timesheet/");
         } else {
             session.setAttribute("status", "Not Auth");

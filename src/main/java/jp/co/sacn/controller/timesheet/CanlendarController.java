@@ -22,6 +22,5 @@ public class CanlendarController extends Controller {
         requestScope("month",month);
         requestScope("day",day);
     	return forward("index.jsp");
-//        return forward("Canlendar.jsp");
     }
 }

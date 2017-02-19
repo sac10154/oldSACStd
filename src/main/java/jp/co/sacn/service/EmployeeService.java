@@ -26,16 +26,13 @@ public class EmployeeService {
         return employee;
     }
     
-    public boolean login(Map<String, Object> input) {
+    public Employee login(Map<String, Object> input) {
         Employee employee = new Employee();
         BeanUtil.copy(input, employee);
         String encryptpw = EncryptUtil.encryptStr(employee.getPassword());
         EmployeeMeta e = EmployeeMeta.get();
-        List<Employee> list = Datastore.query(e).filter(e.userid.equal(employee.getUserid()), e.password.equal(encryptpw)).asList();
-        if(list.size() == 0){
-            return false;
-        }
-        return true;
+        Employee emp = Datastore.query(e).filter(e.userid.equal(employee.getUserid()), e.password.equal(encryptpw)).asSingle();
+        return emp;
     }
 
     public List<Employee> getEmployeeList() {

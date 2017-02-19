@@ -1,3 +1,4 @@
+
 package jp.co.sacn.model;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import org.slim3.datastore.Model;
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class WorkReport implements Serializable {
+public class Attendance implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,26 +22,17 @@ public class WorkReport implements Serializable {
     // ユーザーID
     private String userid;
 
-    // 年月
-    private String ym;
+    // 年月日(yyyymmdd)
+    private String ymd;
 
-    // 日
-    private String date;
-
-    // 出社時間
+    // 出社時間(hhmi)
     private String arrivalTime;
 
-    // 退社時間
+    // 退社時間(hhmi)
     private String quittingTime;
 
     // 休暇等
     private String type;
-
-    // シフトA
-    private boolean shiftA;
-
-    // シフトB
-    private boolean shiftB;
 
     // 行先常駐先
     private String memo;
@@ -98,31 +90,17 @@ public class WorkReport implements Serializable {
 	}
 
 	/**
-	 * @return ym
+	 * @return ymd
 	 */
-	public String getYm() {
-		return ym;
+	public String getYmd() {
+		return ymd;
 	}
 
 	/**
-	 * @param ym セットする ym
+	 * @param ymd セットする ymd
 	 */
-	public void setYm(String ym) {
-		this.ym = ym;
-	}
-
-	/**
-	 * @return date
-	 */
-	public String getDate() {
-		return date;
-	}
-
-	/**
-	 * @param date セットする date
-	 */
-	public void setDate(String date) {
-		this.date = date;
+	public void setYmd(String ymd) {
+		this.ymd = ymd;
 	}
 
 	/**
@@ -168,34 +146,6 @@ public class WorkReport implements Serializable {
 	}
 
 	/**
-	 * @return shiftA
-	 */
-	public boolean isShiftA() {
-		return shiftA;
-	}
-
-	/**
-	 * @param shiftA セットする shiftA
-	 */
-	public void setShiftA(boolean shiftA) {
-		this.shiftA = shiftA;
-	}
-
-	/**
-	 * @return shiftB
-	 */
-	public boolean isShiftB() {
-		return shiftB;
-	}
-
-	/**
-	 * @param shiftB セットする shiftB
-	 */
-	public void setShiftB(boolean shiftB) {
-		this.shiftB = shiftB;
-	}
-
-	/**
 	 * @return memo
 	 */
 	public String getMemo() {
@@ -228,7 +178,7 @@ public class WorkReport implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        WorkReport other = (WorkReport) obj;
+        Attendance other = (Attendance) obj;
         if (key == null) {
             if (other.key != null) {
                 return false;
